@@ -10,7 +10,7 @@ const withMDX = createMDX({
   options: {
     rehypePlugins: [
       [
-        "rehype-pretty-code" as any,
+        "rehype-pretty-code" as unknown as string,
         {
           theme: "github-dark",
           keepBackground: true,

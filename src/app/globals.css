@@ -1,1 +1,171 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-callout-tip: var(--callout-tip);
+  --color-callout-tip-bg: var(--callout-tip-bg);
+  --color-callout-note: var(--callout-note);
+  --color-callout-note-bg: var(--callout-note-bg);
+  --color-callout-warning: var(--callout-warning);
+  --color-callout-warning-bg: var(--callout-warning-bg);
+  --color-callout-info: var(--callout-info);
+  --color-callout-info-bg: var(--callout-info-bg);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Technical palette: Navy base, Teal primary, Amber feedback accent */
+  --background: oklch(0.985 0.005 240);
+  --foreground: oklch(0.18 0.04 240);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.04 240);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.04 240);
+
+  /* Deep Teal Primary */
+  --primary: oklch(0.48 0.14 195);
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Amber Secondary Accent */
+  --secondary: oklch(0.95 0.03 75);
+  --secondary-foreground: oklch(0.35 0.12 60);
+
+  --muted: oklch(0.95 0.01 240);
+  --muted-foreground: oklch(0.44 0.03 240);
+
+  /* Accent - Teal hover/highlight */
+  --accent: oklch(0.94 0.03 195);
+  --accent-foreground: oklch(0.35 0.12 195);
+
+  --destructive: oklch(0.57 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.89 0.015 240);
+  --input: oklch(0.89 0.015 240);
+  --ring: oklch(0.48 0.14 195);
+
+  /* Callouts */
+  --callout-tip: oklch(0.52 0.16 160);
+  --callout-tip-bg: oklch(0.97 0.03 160);
+  --callout-note: oklch(0.48 0.14 195);
+  --callout-note-bg: oklch(0.96 0.025 195);
+  --callout-warning: oklch(0.58 0.18 65);
+  --callout-warning-bg: oklch(0.97 0.04 65);
+  --callout-info: oklch(0.50 0.16 260);
+  --callout-info-bg: oklch(0.96 0.03 260);
+}
+
+.dark {
+  /* Deep Technical Navy Base */
+  --background: oklch(0.15 0.035 245);
+  --foreground: oklch(0.95 0.01 240);
+
+  --card: oklch(0.19 0.04 245);
+  --card-foreground: oklch(0.95 0.01 240);
+
+  --popover: oklch(0.19 0.04 245);
+  --popover-foreground: oklch(0.95 0.01 240);
+
+  /* Vibrant Teal Primary */
+  --primary: oklch(0.70 0.14 195);
+  --primary-foreground: oklch(0.14 0.04 245);
+
+  /* Amber Secondary Accent */
+  --secondary: oklch(0.24 0.04 65);
+  --secondary-foreground: oklch(0.88 0.12 65);
+
+  --muted: oklch(0.22 0.035 245);
+  --muted-foreground: oklch(0.70 0.02 240);
+
+  --accent: oklch(0.25 0.04 195);
+  --accent-foreground: oklch(0.85 0.10 195);
+
+  --destructive: oklch(0.65 0.20 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.28 0.03 245);
+  --input: oklch(0.28 0.03 245);
+  --ring: oklch(0.70 0.14 195);
+
+  /* Dark Callouts */
+  --callout-tip: oklch(0.72 0.16 160);
+  --callout-tip-bg: oklch(0.20 0.04 160);
+  --callout-note: oklch(0.70 0.14 195);
+  --callout-note-bg: oklch(0.20 0.04 195);
+  --callout-warning: oklch(0.76 0.18 65);
+  --callout-warning-bg: oklch(0.22 0.05 65);
+  --callout-info: oklch(0.72 0.16 260);
+  --callout-info-bg: oklch(0.21 0.04 260);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    line-height: 2rem;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    line-height: 1.75rem;
+  }
+}
