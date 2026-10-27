@@ -1,0 +1,144 @@
+---
+title: "Introduction to Control Systems & Simulation Environment"
+week: 1
+description: "Warm-up: Set up Python/MATLAB environment and simulate a 1st-order RC circuit. Core: Model open-loop vs. closed-loop step response for a DC motor. Boss Level: Implement discrete step simulation with sensor noise."
+---
+
+# Lab 1: Introduction to Control Systems & Simulation Environment
+
+Welcome to **Lab 1** of Control Systems Engineering! In this lab, you will set up your computational simulation environment using Python (or MATLAB) and explore the foundational differences between open-loop and closed-loop dynamic systems.
+
+<Tip title="Lab Prerequisites">
+Ensure you have installed Python 3.10+ along with `numpy`, `matplotlib`, and `scipy` or `control`.
+</Tip>
+
+---
+
+## 1. Objectives
+
+By completing this lab module, you will be able to:
+1. Construct transfer function representations in Python using `scipy.signal.TransferFunction`.
+2. Compute and visualize time-domain step responses for first-order and second-order physical systems.
+3. Quantify the impact of feedback on dynamic disturbance rejection and steady-state error.
+4. Simulate discrete time-stepping loops with additive Gaussian measurement noise.
+
+---
+
+## 2. Theoretical Overview
+
+### First-Order RC Circuit
+Consider a simple passive RC low-pass filter driven by an input voltage v_in(t). Applying Kirchhoff's Voltage Law yields:
+
+> **Differential Equation:**
+> R * C * (d v_out / dt) + v_out(t) = v_in(t)
+
+Taking the Laplace transform with zero initial conditions v_out(0) = 0:
+
+> **Transfer Function:**
+> G(s) = V_out(s) / V_in(s) = 1 / (tau * s + 1)
+
+where time constant **tau = R * C**.
+
+<Note title="Key Concept: Time Constant">
+For a first-order system, the response reaches 63.2% of its final value at t = tau, and 98% of its final value at t = 4 * tau.
+</Note>
+
+---
+
+## 3. Lab Exercises
+
+### Exercise 1 (Warm-up): First-Order Step Response Simulation
+
+In this exercise, you will write a Python script to simulate the step response of an RC filter with R = 10 kOhm and C = 100 uFarad (tau = 1.0s).
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.signal as signal
+
+# System parameters
+R = 10e3   # 10 kOhm
+C = 100e-6 # 100 uFarad
+tau = R * C # time constant = 1.0s
+
+# Transfer function G(s) = 1 / (tau * s + 1)
+num = [1.0]
+den = [tau, 1.0]
+system = signal.TransferFunction(num, den)
+
+# Time vector and step response
+t = np.linspace(0, 5 * tau, 500)
+t_out, y_out = signal.step(system, T=t)
+
+# Plot results
+plt.figure(figsize=(8, 4.5))
+plt.plot(t_out, y_out, label="v_out(t)", color="navy", lw=2)
+plt.axhline(1.0, color="gray", linestyle="--", label="Step Input v_in(t)")
+plt.axvline(tau, color="red", linestyle=":", label=f"tau = {tau:.1f}s (63.2%)")
+plt.title("First-Order RC Circuit Step Response")
+plt.xlabel("Time (s)")
+plt.ylabel("Voltage (V)")
+plt.grid(True, alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+### Exercise 2 (Core): Open-Loop vs. Closed-Loop DC Motor Speed Control
+
+A permanent magnet DC motor plant with torque constant K_t, back-EMF K_b, armature resistance R_a, and inertia J has the open-loop transfer function:
+
+> **Motor Transfer Function:**
+> P(s) = W(s) / V(s) = K_m / (tau_m * s + 1)
+
+Compare open-loop speed control against unity negative feedback control under a step disturbance:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Motor parameters
+Km = 2.0   # Steady-state gain (rad/s / V)
+tau_m = 0.5 # Motor time constant (s)
+
+# Simulation time grid
+dt = 0.001
+t = np.arange(0, 4.0, dt)
+N = len(t)
+
+# Open-loop simulation
+v_in = np.ones(N) # 1V step input
+w_open = np.zeros(N)
+
+for i in range(1, N):
+    dw_dt = (-w_open[i-1] + Km * v_in[i-1]) / tau_m
+    w_open[i] = w_open[i-1] + dw_dt * dt
+
+# Closed-loop simulation with proportional feedback Kp = 5.0
+Kp = 5.0
+r = np.ones(N) # Reference setpoint (rad/s)
+w_closed = np.zeros(N)
+
+for i in range(1, N):
+    e = r[i-1] - w_closed[i-1] # Feedback error
+    u = Kp * e                  # Control law
+    dw_dt = (-w_closed[i-1] + Km * u) / tau_m
+    w_closed[i] = w_closed[i-1] + dw_dt * dt
+
+# Plot comparison
+plt.figure(figsize=(9, 5))
+plt.plot(t, w_open, label="Open-Loop Response", color="crimson", lw=2)
+plt.plot(t, w_closed, label="Closed-Loop Response (Kp=5.0)", color="seagreen", lw=2)
+plt.axhline(1.0, color="black", linestyle="--", label="Target Reference r(t)")
+plt.title("DC Motor Speed Control: Open-Loop vs. Closed-Loop")
+plt.xlabel("Time (s)")
+plt.ylabel("Angular Speed omega (rad/s)")
+plt.grid(True, alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+<Warning title="Submission Checklist">
+Save your plots as PNG files and submit your Python script (`lab1_solution.py`) along with your brief written responses in the course portal.
+</Warning>
