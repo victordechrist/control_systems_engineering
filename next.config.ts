@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({
   options: {
+    remarkPlugins: [
+      ["remark-frontmatter" as unknown as string],
+      ["remark-mdx-frontmatter" as unknown as string],
+    ],
     rehypePlugins: [
       [
         "rehype-pretty-code" as unknown as string,

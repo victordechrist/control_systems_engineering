@@ -1,0 +1,105 @@
+---
+title: "Introduction to Control Systems Engineering"
+week: 1
+description: "Foundational concepts of control systems engineering: open-loop vs. closed-loop control, key system components, and real-world engineering applications."
+date: "2025-09-08"
+---
+
+# Introduction to Control Systems Engineering
+
+Welcome to **Control Systems Engineering**. Control systems form the invisible backbone of modern automation, aerospace, robotics, manufacturing, and energy infrastructure. The central goal of control engineering is to influence the dynamic behavior of physical systems (called **plants**) so that their actual outputs match desired target states (**reference inputs** or setpoints), even when subjected to external disturbances and dynamic uncertainties.
+
+---
+
+## 1. Open-Loop vs. Closed-Loop Control
+
+Every control system operates under one of two primary topological paradigms: **open-loop control** or **closed-loop (feedback) control**.
+
+### Open-Loop Control Systems
+
+In an **open-loop control system**, the control action is computed purely based on historical input commands or pre-programmed schedules, completely independent of the actual system output.
+
+```
++---------------+     +------------+     +-----------+
+| Desired State | --> | Controller | --> |   Plant   | --> Actual Output
++---------------+     +------------+     +-----------+
+```
+
+* **Characteristics:**
+  - Simple structure and low initial cost.
+  - No sensor feedback hardware required.
+  - Highly susceptible to environmental disturbances, aging components, and calibration drift.
+
+* **Example:** A basic toaster operating on a fixed timer. The heating element stays active for 120 seconds regardless of bread moisture, thickness, or initial temperature.
+
+---
+
+### Closed-Loop (Feedback) Control Systems
+
+In a **closed-loop control system**, the actual system output is continuously measured by sensors and fed back to compare against the reference input. The difference between the reference input `r(t)` and the output `y(t)` forms an **error signal** `e(t) = r(t) - y(t)`, which drives the controller action.
+
+```
+                  +---+     +------------+     +-----------+
+  Reference r(t)  |   | e(t)| Controller | u(t)|   Plant   | Output y(t)
+------------+---> | + | --> | (Compensator) -->| (Process) |--------+--->
+            |     |   |     +------------+     +-----------+        |
+            |     +-|-+                                             |
+            |       ^ -                                             |
+            |       |           +------------+                      |
+            |       +---------- |   Sensor   | <--------------------+
+            |                   +------------+
+```
+
+* **Characteristics:**
+  - Rejects external disturbance inputs (e.g., wind gusts, load changes).
+  - Maintains accuracy despite plant uncertainty or component parameter variations.
+  - Requires careful mathematical design to prevent closed-loop instability.
+
+---
+
+## 2. Fundamental System Components
+
+A complete feedback control loop consists of four functional subsystems:
+
+1. **Reference Command (`r(t)`):** The target state setpoint supplied by a human operator, trajectory planner, or supervisory algorithm.
+2. **Controller / Compensator:** The decision-making block (analog circuit or digital algorithm) that processes the error signal `e(t)` to generate a control action `u(t)`.
+3. **Actuator:** The physical element (such as a motor drive, hydraulic valve, or power inverter) that converts low-power control signals into high-power energy applied to the plant.
+4. **Plant / Process:** The physical dynamic system being controlled (e.g., robotic manipulator arm, satellite reaction wheel, chemical reactor).
+5. **Sensor / Transducer:** The measurement device (encoder, tachometer, thermocouple, accelerometer) that measures the plant's output and provides feedback.
+
+---
+
+## 3. Real-World Engineering Examples
+
+### Automotive Cruise Control System
+
+In a modern adaptive cruise control system:
+* **Setpoint `r(t)`:** Target vehicle velocity set by the driver (e.g., 65 mph).
+* **Sensor:** Wheel speed hall-effect sensors and optical radar measuring actual vehicle speed `y(t)`.
+* **Controller:** Electronic Control Unit (ECU) computing throttling or brake force based on velocity error.
+* **Actuator:** Electronic throttle body valve altering fuel-air mixture to the internal combustion engine or motor inverter.
+* **Disturbances:** Road inclines, aerodynamic headwind, surface friction changes.
+
+---
+
+### HVAC Thermal Regulation
+
+* **Setpoint:** Target room temperature (72°F).
+* **Sensor:** Digital thermistor or resistance temperature detector (RTD).
+* **Actuator:** Compressor relay and variable-speed circulation fan.
+* **Disturbance:** Opening external windows or changes in ambient outdoor temperature.
+
+---
+
+## 4. Course Roadmap & Control Engineering Workflow
+
+Over the 15 weeks of this course, we will follow a rigorous four-step engineering workflow:
+
+1. **Modeling:** Derive first-principles differential equations, Laplace transfer functions `G(s)`, and state-space models `x' = Ax + Bu`.
+2. **Analysis:** Evaluate stability, transient response (overshoot, settling time), and frequency response metrics (gain margin, phase margin).
+3. **Synthesis & Design:** Formulate lead-lag compensators, PID controllers, and state-feedback control laws.
+4. **Verification:** Implement dynamic simulations in Python/MATLAB and validate performance against physical constraints.
+
+<Tip>
+Key takeaway: Feedback allows us to trade control energy and complexity for high performance, disturbance rejection, and robustness against model uncertainty.
+</Tip>
