@@ -2,7 +2,7 @@ import React from "react";
 import { PageHeader } from "@/components/course/page-header";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { User, Mail, Clock, MapPin, GraduationCap, Shield } from "lucide-react";
+import { User, Mail, Clock, MapPin } from "lucide-react";
 
 interface StaffMember {
   role: string;

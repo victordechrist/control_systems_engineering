@@ -1,7 +1,7 @@
 import React from "react";
 import { ExternalLink, BookOpen, Wrench, BookmarkCheck } from "lucide-react";
 import { PageHeader } from "@/components/course/page-header";
-import { resources, Resource } from "@/data/resources";
+import { resources } from "@/data/resources";
 import {
   Card,
   CardHeader,

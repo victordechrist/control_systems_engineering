@@ -54,7 +54,7 @@ export function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 text-sm font-medium">
           {PRIMARY_LINKS.map((link) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`));
             return (
@@ -80,6 +80,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
+                  aria-label="More course links"
                   className={cn(
                     "gap-1 px-3 py-2 h-auto text-sm font-medium",
                     isMoreActive
@@ -126,7 +127,7 @@ export function Navbar() {
 
       {/* Mobile Drawer / Collapsible Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-border bg-background px-4 pt-2 pb-4 space-y-1 shadow-lg">
+        <nav aria-label="Mobile Navigation" className="md:hidden border-b border-border bg-background px-4 pt-2 pb-4 space-y-1 shadow-lg">
           {PRIMARY_LINKS.map((link) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`));
             return (
@@ -169,7 +170,7 @@ export function Navbar() {
               );
             })}
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

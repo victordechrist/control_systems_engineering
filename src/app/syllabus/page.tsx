@@ -1,16 +1,10 @@
 import React from "react";
-import Link from "next/link";
 import {
   FileDown,
   Sparkles,
-  BookOpen,
-  GraduationCap,
-  Calendar,
   CheckCircle2,
-  Clock,
   ExternalLink,
   Award,
-  AlertCircle,
   HelpCircle,
 } from "lucide-react";
 import { PageHeader } from "@/components/course/page-header";

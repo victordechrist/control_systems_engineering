@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, BookOpen, Calendar, Tag } from "lucide-react";
+import { ArrowLeft, BookOpen, Calendar } from "lucide-react";
 import { getLectures, getLecture } from "@/lib/lectures";
 import { Badge } from "@/components/ui/badge";
 
@@ -30,7 +30,7 @@ export default async function LectureDetailPage({ params }: PageProps) {
   try {
     const mdxModule = await import(`@/content/lectures/${slug}.mdx`);
     LectureComponent = mdxModule.default;
-  } catch (error) {
+  } catch {
     notFound();
   }
 

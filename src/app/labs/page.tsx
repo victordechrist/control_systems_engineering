@@ -2,13 +2,9 @@ import React from "react";
 import Link from "next/link";
 import {
   FlaskConical,
-  Sparkles,
   ArrowRight,
   CheckCircle2,
-  Clock,
   Award,
-  Layers,
-  FileCode2,
   Lock,
 } from "lucide-react";
 import { PageHeader } from "@/components/course/page-header";
@@ -20,11 +16,10 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent,
   CardFooter,
 } from "@/components/ui/card";
 
-import { labs, Lab } from "@/data/labs";
+import { labs } from "@/data/labs";
 import { miniProjectMilestones } from "@/data/assessments";
 
 const groups = ["Modeling", "Response", "Stability & Design", "Project"] as const;

@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Layers, Clock, AlertCircle, FileText, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Clock, FileText } from "lucide-react";
 import { labs } from "@/data/labs";
-import { PageHeader } from "@/components/course/page-header";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Callout } from "@/components/course/callout";
